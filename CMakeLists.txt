@@ -15,3 +15,5 @@ add_subdirectory("DisjointSet-Provinces")
 add_subdirectory("002-SmallestStringWithSwaps")
 
 add_subdirectory("FindPivotIndex")
+
+add_subdirectory("0004-LargestNumberTwiceOthers")
