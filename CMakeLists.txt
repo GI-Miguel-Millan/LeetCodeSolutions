@@ -17,3 +17,5 @@ add_subdirectory("002-SmallestStringWithSwaps")
 add_subdirectory("FindPivotIndex")
 
 add_subdirectory("0004-LargestNumberTwiceOthers")
+
+add_subdirectory("0005-Plus-One")
