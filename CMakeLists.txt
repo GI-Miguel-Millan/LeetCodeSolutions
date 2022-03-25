@@ -9,3 +9,5 @@ project ("LeetCodeSolutions")
 add_executable (LeetCodeSolutions "LeetCodeSolutions.cpp" "LeetCodeSolutions.h")
 
 # TODO: Add tests and install targets if needed.
+
+add_subdirectory("DisjointSet-Provinces")
