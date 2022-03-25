@@ -9,12 +9,12 @@ std::vector<int> plusOne(std::vector<int>& digits)
 {
     int index = digits.size() - 1;
     digits[index]++;
-    for (int lowerIndex = index - 1; index > 0; index--, lowerIndex--)
+    for (; index > 0; index--)
     {
         if (digits[index] == 10)
         {
             digits[index] -= 10;
-            digits[lowerIndex]++;
+            digits[index - 1]++;
             continue;
         }
         break;
