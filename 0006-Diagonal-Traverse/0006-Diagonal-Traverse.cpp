@@ -11,99 +11,64 @@ std::vector<int> findDiagonalOrder(std::vector<std::vector<int>>& mat)
     std::vector<int> diagonal;
     int m = mat.size();
     int n = mat[0].size();
+
+    if (m == 1) return mat[0];
+    if (n == 1)
+    {
+        for (int i = 0; i < mat.size(); i++)
+            diagonal.push_back(mat[i][0]);
+        return diagonal;
+    }
+
     int len = m * n;
+    
+    diagonal.push_back(mat[0][0]); 
 
-    int incrRow = -1;
-    int incrCol = +1;
-    int row = 0, col = 0;
+    int row = 0, col = 1;
+    int incrRow = +1;
+    int incrCol = -1;
 
-    int maxDiagonal = std::min(m, n);
-
-    // Ramp up to diagonal
-    for (int i = 0; i < maxDiagonal; i++)
+    for (int i = 1; i < len - 1; i++)
     {
-        int currentDiagonalCount = i + 1;
-        while (currentDiagonalCount > 0)
-        {
-            diagonal.push_back(mat[row][col]);
-            currentDiagonalCount--;
+        diagonal.push_back(mat[row][col]);
 
-            if (currentDiagonalCount == 0)
+        if (incrRow < 1)
+        {
+            if (row == 0 || col == n - 1)
             {
-                if (incrRow < 0)
+                if (col < n - 1)
                     col++;
                 else
                     row++;
 
                 std::swap(incrRow, incrCol);
-                continue;
             }
-
-            row += incrRow;
-            col += incrCol;
-        }
-    }
-
-    // Handle out of bounds
-    if (row == m)
-    {
-        row = m - 1;
-        col++;
-    }
-    else if (col == n)
-    {
-        col = n - 1;
-        row++;
-    }
-
-    // add additional diagonals
-    int remainingDiagonals = std::abs(m - n);
-    for (int i = 0; i < remainingDiagonals; i++)
-    {
-        for (int j = 0; j < maxDiagonal; j++)
-        {
-            diagonal.push_back(mat[row][col]);
-
-            if (j == maxDiagonal - 1)
+            else
             {
-                if (incrRow < 0)
+                row += incrRow;
+                col += incrCol;
+            }
+        }
+        else
+        {
+            if (row == m - 1 || col == 0)
+            {
+                if (row < m - 1)
                     row++;
                 else
                     col++;
 
                 std::swap(incrRow, incrCol);
-                continue;
             }
-
-            row += incrRow;
-            col += incrCol;
-        }
-    }
-
-    // Ramp down from diagonal
-    for (int i = maxDiagonal - 1; i > 0; i--)
-    {
-        int currentDiagonalCount = i;
-        while (currentDiagonalCount > 0)
-        {
-            diagonal.push_back(mat[row][col]);
-            currentDiagonalCount--;
-
-            if (currentDiagonalCount == 0)
+            else
             {
-                if (incrRow < 0)
-                    row++;
-                else
-                    col++;
-
-                std::swap(incrRow, incrCol);
-                continue;
+                row += incrRow;
+                col += incrCol;
             }
-
-            row += incrRow;
-            col += incrCol;
         }
     }
+
+    diagonal.push_back(mat[m - 1][n - 1]);
 
     return diagonal;
 }
@@ -125,9 +90,13 @@ int main()
     std::vector<std::vector<int>> test2 = { {1} };
     std::vector<std::vector<int>> test3 = { {1, 2} };
     std::vector<std::vector<int>> test4 = { {1}, {2} };
+    
     std::vector<std::vector<int>> test5 = { {1, 2}, {3,4} };
     std::vector<std::vector<int>> test6 = { {1, 2, 3}, {4, 5, 6}, {7, 8 ,9}, {10, 11, 12} };
     std::vector<std::vector<int>> test7 = { {1, 2 , 3, 4, 5}, {6, 7, 8 ,9, 10}, {11, 12, 13, 14, 15 } };
+
+    std::vector<std::vector<int>> test8 = { {1}, {2}, {3} };
+    std::vector<std::vector<int>> test9 = { {2,3,4}, {5, 6, 7 }, {8, 9, 10}, {11, 12, 13}, {14, 15, 16} };
 
     std::cout << "Expected [1, 2, 4, 7, 5, 3, 6, 8, 9], Actual: "; print(findDiagonalOrder(test1));
     std::cout << "Expected [1], Actual: "; print(findDiagonalOrder(test2));
@@ -136,6 +105,8 @@ int main()
     std::cout << "Expected [1, 2, 3, 4], Actual: "; print(findDiagonalOrder(test5));
     std::cout << "Expected [1, 2, 4, 7, 5, 3, 6, 8, 10, 11, 9, 12], Actual: "; print(findDiagonalOrder(test6));
     std::cout << "Expected [1, 2, 6, 11, 7, 3, 4, 8, 12, 13, 9, 5,10, 14, 15], Actual: "; print(findDiagonalOrder(test7));
+    std::cout << "Expected [1, 2, 3], Actual: "; print(findDiagonalOrder(test8));
+    std::cout << "Expected [2,3,5,8,6,4,7,9,11,14,12,10,13,15,16], Actual: "; print(findDiagonalOrder(test9));
     
 	return 0;
 }
