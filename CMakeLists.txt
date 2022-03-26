@@ -19,3 +19,5 @@ add_subdirectory("FindPivotIndex")
 add_subdirectory("0004-LargestNumberTwiceOthers")
 
 add_subdirectory("0005-Plus-One")
+
+add_subdirectory("0006-Diagonal-Traverse")
