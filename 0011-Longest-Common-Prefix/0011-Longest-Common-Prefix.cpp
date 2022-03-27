@@ -9,23 +9,16 @@ std::string longestCommonPrefix(std::vector<std::string>& strs)
 {
 	if (strs.size() == 1) return strs[0];
 
-	std::string shortestString = strs[0];
-	for (auto str : strs)
-	{
-		if (str.size() < shortestString.size())
-			shortestString = str;
-	}
-
 	std::string prefix = "";
-	for (int i = 0; i < shortestString.size(); i++)
+	for (int i = 0; i < strs[0].size(); i++)
 	{
-		for (auto str : strs)
+		for (int j = 0; j < strs.size(); j++)
 		{
-			if (str[i] != shortestString[i])
+			if (i == strs[j].size() || strs[j][i] != strs[0][i])
 				return prefix;
 		}
 
-		prefix += shortestString[i];
+		prefix += strs[0][i];
 	}
 
 	return prefix;
