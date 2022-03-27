@@ -9,49 +9,33 @@
 
 std::string addBinary(std::string a, std::string b)
 {
-	std::string longerString = a;
-	std::string shorterString = b;
 	std::string result;
 
-	if (a.size() < b.size())
-	{
-		longerString = b;
-		shorterString = a;
-	}
-
+	int aIndex = a.size() - 1;
+	int bIndex = b.size() - 1;
 	int carry = 0;
-	int longerStringIndex = longerString.size() - 1;
-	for (int i = shorterString.size() - 1; i >= 0; i--, longerStringIndex--)
-	{
-		int lVal = longerString[longerStringIndex] == '1' ? 1 : 0;
-		int sVal = shorterString[i] == '1' ? 1 : 0;
-		int digitSum = lVal + sVal + carry;
 
-		result += (digitSum % 2 == 0) ? '0' : '1';
-		carry = digitSum >> 1;
-	}
-
-	while (longerStringIndex >= -1)
+	while (aIndex >= 0 || bIndex >= 0 || carry > 0)
 	{
-		if (longerStringIndex < 0)
+		int aVal = 0, bVal = 0;
+
+		if (aIndex >= 0)
 		{
-			if (carry == 1)
-				result += "1";
-			break;
+			aVal = a[aIndex] == '1' ? 1 : 0;
+			aIndex--;
 		}
 
-		int lVal = longerString[longerStringIndex] == '1' ? 1 : 0;
-		int digitSum = lVal + carry;
+		if (bIndex >= 0)
+		{
+			bVal = b[bIndex] == '1' ? 1 : 0;
+			bIndex--;
+		}
 
-		result += (digitSum % 2 == 0) ? '0' : '1';
-		carry = digitSum >> 1;
-
-		longerStringIndex--;
+		int sum = aVal + bVal + carry;
+		char digit = (sum % 2 == 0) ? '0' : '1';
+		result = digit + result;
+		carry = sum >> 1;
 	}
-
-	int halfPoint = result.size() / 2;
-	for (int i = 0, j = result.size() - 1; i < halfPoint; i++, j--)
-		std::swap(result[i], result[j]);
 
 	return result;
 }
