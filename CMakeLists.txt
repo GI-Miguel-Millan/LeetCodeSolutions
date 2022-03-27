@@ -25,3 +25,5 @@ add_subdirectory("0006-Diagonal-Traverse")
 add_subdirectory("0007-SpiralMatrix")
 
 add_subdirectory("0008-Pascals-Triangle")
+
+add_subdirectory("0009-AddBinaryString")
