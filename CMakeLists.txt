@@ -31,3 +31,5 @@ add_subdirectory("0009-AddBinaryString")
 add_subdirectory("0010-Implement-strStr")
 
 add_subdirectory("0011-Longest-Common-Prefix")
+
+add_subdirectory("0012-Array-Partition1")
