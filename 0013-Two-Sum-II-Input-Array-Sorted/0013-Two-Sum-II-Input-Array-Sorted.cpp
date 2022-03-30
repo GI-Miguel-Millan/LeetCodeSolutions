@@ -6,54 +6,23 @@
 
 std::vector<int> twoSum(std::vector<int>& numbers, int target)
 {
-    if (numbers.size() == 2)
-    {
-        numbers.clear();
-        numbers.push_back(1);
-        numbers.push_back(2);
-        return numbers;
-    }
 
-    int high = numbers.size() - 1;
     int low = 0;
+    int high = numbers.size() - 1;
+    int sum = numbers[low] + numbers[high];
 
-    bool sumFound = false;
-    for (int i = 0; i < numbers.size() - 1; i++)
+    while (sum != target)
     {
-        high = numbers.size() - 1;
-        low = i;
-
-        if (numbers[high] + numbers[low] == target)
-            break;
-
-        int mid = (high - low) / 2 + low;
-        while (mid > low && mid < high)
+        if (sum > target)
         {
-            int sum = numbers[mid] + numbers[i];
-            if (sum == target)
-            {
-                sumFound = true;
-                break;
-            }
-
-            if (sum > target)
-            {
-                high = mid;
-            }
-            else
-            {
-                low = mid;
-            }
-
-            mid = (high - low) / 2 + low;
+            high--;
+        }
+        else
+        {
+            low++;
         }
 
-        if (sumFound)
-        {
-            low = i;
-            high = mid;
-            break;
-        }
+        sum = numbers[low] + numbers[high];
     }
 
     numbers.clear();
