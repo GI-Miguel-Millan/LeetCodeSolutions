@@ -35,3 +35,5 @@ add_subdirectory("0011-Longest-Common-Prefix")
 add_subdirectory("0012-Array-Partition1")
 
 add_subdirectory("0013-Two-Sum-II-Input-Array-Sorted")
+
+add_subdirectory("0014-RemoveElement")
