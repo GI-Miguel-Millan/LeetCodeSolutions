@@ -9,6 +9,7 @@ project ("LeetCodeSolutions")
 add_executable (0000-LeetCodeSolutions "LeetCodeSolutions.cpp" "LeetCodeSolutions.h")
 
 # TODO: Add tests and install targets if needed.
+add_subdirectory("Utilities")
 
 add_subdirectory("DisjointSet-Provinces")
 
@@ -41,3 +42,6 @@ add_subdirectory("0014-RemoveElement")
 add_subdirectory("0015-MaxConsecutiveOnes")
 
 add_subdirectory("0016-MinimumSizeSubArraySum")
+
+add_subdirectory("0017-RotateArray")
+
