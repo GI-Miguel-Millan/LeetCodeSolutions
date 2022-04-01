@@ -39,3 +39,5 @@ add_subdirectory("0013-Two-Sum-II-Input-Array-Sorted")
 add_subdirectory("0014-RemoveElement")
 
 add_subdirectory("0015-MaxConsecutiveOnes")
+
+add_subdirectory("0016-MinimumSizeSubArraySum")

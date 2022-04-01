@@ -1,0 +1,13 @@
+
+**** vector size compared with negative values ****
+
+	- vector.size() ==> returns size_t (which is an unsigned integer).
+	- when you compare an integer and an unsigned integer, the integer gets casted to an unsigned int, which may result in the wrong value when comparing negative integers.
+
+	Observe the following:
+	std::vector<int> nums = {1, 2, 3, 4, 5};
+
+	bool test1 = -1 < nums.size(); // evaluates to false, because -1 gets converted to an unsigned integer (really large). 
+	bool test2 = nums.size() > -1; // also evaluates to false, same reason
+	bool test3 = -1 < (int)nums.size(); // evalutates to true, since we will now be performing a signed integer comparison
+
