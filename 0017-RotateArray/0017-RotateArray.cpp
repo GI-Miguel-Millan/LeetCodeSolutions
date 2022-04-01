@@ -7,63 +7,12 @@
 #include <vector>
 #include <iostream>
 
-void xrotate(std::vector<int>& nums, int k)
+void rotateInPlace(std::vector<int>& nums, int k)
 {
-	if (k >= nums.size())
-		k = k % nums.size();
-
-	if (k == 0) return;
-
-	int bucket = nums[0];
-	int targetIndex = 0;
-	bool needsAdjustment = (nums.size() % k == 0);
-	for (int i = 0; i < nums.size(); i++)
-	{
-		targetIndex += k;
-		if (targetIndex >= nums.size())
-		{ 
-			targetIndex -= (int)nums.size();
-			if (needsAdjustment)
-			{
-				nums[targetIndex] = bucket;
-				targetIndex++;
-				bucket = nums[targetIndex];
-			}
-			else
-			{
-				std::swap(bucket, nums[targetIndex]);
-			}
-			continue;
-		}
-			
-		std::swap(bucket, nums[targetIndex]);
-	}
-}
-
-void rotate(std::vector<int>& nums, int k)
-{
-	if (k >= nums.size())
-		k = k % nums.size();
-
-	if (k == 0) return;
-
-
-
-	int startIndex = k;
-	int targetIndex;
-	int bucket = nums[startIndex];
-	for (int i = 0; i < nums.size(); i++)
-	{
-		targetIndex = startIndex + 1;
-		if (targetIndex >= nums.size())
-			targetIndex -= nums.size();
-
-		std::swap(bucket, nums[targetIndex]);
-
-		startIndex++;
-		if (startIndex >= nums.size())
-			startIndex -= nums.size();
-	}
+	k = k % nums.size();
+	std::reverse(nums.begin(), nums.end());
+	std::reverse(nums.begin(), nums.begin() + k);
+	std::reverse(nums.begin() + k, nums.end());
 }
 
 void rotateGuarenteed(std::vector<int>& nums, int k)
@@ -94,7 +43,7 @@ void testRotationValues(std::vector<int>& nums, int maxK)
 		std::vector<int> expected(nums.begin(), nums.end());
 		std::vector<int> actual(nums.begin(), nums.end());
 
-		rotate(actual, i);
+		rotateInPlace(actual, i);
 		rotateGuarenteed(expected, i);
 
 		std::cout << "Test: " << Utilities::GetString(nums) << ", " << i << ": ";
